@@ -1,4 +1,14 @@
-An `OCaml` utility to automate [alura.com.br](https://www.alura.com.br/) courses along the lines of `coursera-dl` and `edx-dl`.
+# alura_dl
 
-- ROADMAP
-It should also helps you manage your projects using `YouTrack`.
+This is inspired from `edx-dl` and downloads the courses from `alura.com.br`
+
+## Development Setup
+
+
+```
+brew install pipenv 
+pipenv lock
+git flow init
+
+pipenv install # uses the already generated Pipfile.lock
+```
