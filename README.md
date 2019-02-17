@@ -54,8 +54,18 @@ Referer: https://cursos.alura.com.br/course/shellscripting/task/28942
 wget --referer "https://cursos.alura.com.br/course/shellscripting/task/28942" "https://player.vimeo.com/video/807833333"
 
 
+- This works
 Video URL from the actual page - got it by it's page `html` rather than `inspect element`
 https://player.vimeo.com/video/229132790
 
 
 youtube-dl https://player.vimeo.com/video/229132790 --referer https://cursos.alura.com.br/course/shellscripting/task/28942
+
+
+
+youtube-dl https://player.vimeo.com/video/229133282 --referer https://cursos.alura.com.br/course/shellscripting/task/28945 
+
+
+
+
+

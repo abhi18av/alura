@@ -13,6 +13,7 @@ requests = "*"
 html5lib = "*"
 pytest = "*"
 six = "*"
+pywebcopy = "*"
 
 [requires]
 python_version = "3.7"
