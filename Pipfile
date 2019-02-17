@@ -11,6 +11,7 @@ youtube-dl = "*"
 requests = "*"
 html5lib = "*"
 pytest = "*"
+six = "*"
 
 [requires]
 python_version = "3.7"
