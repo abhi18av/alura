@@ -2,30 +2,30 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from edx_dl import edx_dl, parsing
-from edx_dl.common import Unit, Video, DEFAULT_FILE_FORMATS
+from alura_dl import alura_dl, parsing
+from alura_dl.common import Unit, Video, DEFAULT_FILE_FORMATS
 
 
 def test_failed_login():
-    resp = edx_dl.edx_login(
-        edx_dl.LOGIN_API, edx_dl.edx_get_headers(), "guest", "guest")
+    resp = alura_dl.alura_login(
+        alura_dl.LOGIN_API, alura_dl.alura_get_headers(), "guest", "guest")
     assert not resp.get('success', False)
 
 
 def test_remove_repeated_urls():
     url = "test/html/multiple_units.html"
-    site = 'https://courses.edx.org'
+    site = 'https://courses.alura.org'
     with open(url, "r") as f:
         html_contents = f.read()
-        page_extractor = parsing.CurrentEdXPageExtractor()
+        page_extractor = parsing.CurrentaluraPageExtractor()
         units_extracted = page_extractor.extract_units_from_html(html_contents,
                                                                  site,
                                                                  DEFAULT_FILE_FORMATS)
 
         all_units = {url: units_extracted}
-        filtered_units = edx_dl.remove_repeated_urls(all_units)
-        num_all_urls = edx_dl.num_urls_in_units_dict(all_units)
-        num_filtered_urls = edx_dl.num_urls_in_units_dict(filtered_units)
+        filtered_units = alura_dl.remove_repeated_urls(all_units)
+        num_all_urls = alura_dl.num_urls_in_units_dict(all_units)
+        num_filtered_urls = alura_dl.num_urls_in_units_dict(filtered_units)
 
         assert num_all_urls == 18
         assert num_filtered_urls == 16
@@ -68,7 +68,7 @@ def test_extract_urls_from_units(all_units):
     Make sure that urls are grabbed from both mp4_urls and from
     resources_urls of Unit class.
     """
-    urls = edx_dl.extract_urls_from_units(all_units, '%(url)s')
+    urls = alura_dl.extract_urls_from_units(all_units, '%(url)s')
     expected = ['1\n', '2\n', '3\n']
     assert sorted(urls) == sorted(expected)
 
@@ -78,7 +78,7 @@ def test_extract_urls_from_units_unknown_units(unknown_units):
     Make sure that we only expect Units in the list of units.
     """
     with pytest.raises(TypeError):
-        edx_dl.extract_urls_from_units(unknown_units, '%(url)s')
+        alura_dl.extract_urls_from_units(unknown_units, '%(url)s')
 
 
 def test_extract_urls_from_units_unknown_videos(unknown_videos):
@@ -86,12 +86,12 @@ def test_extract_urls_from_units_unknown_videos(unknown_videos):
     Make sure that we only expect Video in the list of Unit videos.
     """
     with pytest.raises(TypeError):
-        edx_dl.extract_urls_from_units(unknown_videos, '%(url)s')
+        alura_dl.extract_urls_from_units(unknown_videos, '%(url)s')
 
 
-def test_edx_get_subtitle():
+def test_alura_get_subtitle():
     """
-    Make sure Stanford subtitle URLs are distinguished from EdX ones.
+    Make sure Stanford subtitle URLs are distinguished from alura ones.
     """
 
     def mock_get_page_contents(u, h):
@@ -109,14 +109,14 @@ def test_edx_get_subtitle():
     get_page_contents = lambda u, h: u
 
     expected = url
-    actual = edx_dl.edx_get_subtitle(url, headers, mock_get_page_contents, mock_get_page_contents_as_json)
+    actual = alura_dl.alura_get_subtitle(url, headers, mock_get_page_contents, mock_get_page_contents_as_json)
     assert expected == actual
 
     # Make sure Non-Stanford URLs still work
-    url = "https://www.edx.org/could/be/more/realistic"
+    url = "https://www.alura.org/could/be/more/realistic"
 
     expected = '0\n00:00:00,123 --> 00:00:00,456\nsubtitle content\n\n'
-    actual = edx_dl.edx_get_subtitle(url, headers, mock_get_page_contents, mock_get_page_contents_as_json)
+    actual = alura_dl.alura_get_subtitle(url, headers, mock_get_page_contents, mock_get_page_contents_as_json)
     assert expected == actual
 
 
@@ -144,7 +144,7 @@ def test_extract_subtitle_urls():
         &lt;/li&gt;
     """
 
-    page_extractor = parsing.CurrentEdXPageExtractor()
+    page_extractor = parsing.CurrentaluraPageExtractor()
     expected = (None, 'https://base.url/courses/Engineering/QMSE02./Winter2016/xblock/i4x:;_;_Engineering;_QMSE02.;_video;_1a4c7ff41e484a15927987b745a5c779/handler/transcript/download')
     actual = page_extractor.extract_subtitle_urls(text, "https://base.url")
     print("actual", actual)

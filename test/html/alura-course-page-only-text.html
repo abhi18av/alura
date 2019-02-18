@@ -1,0 +1,697 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt-BR" data-product="alura">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	
+		
+
+
+
+<!-- Page hiding snippet (recommended)  -->
+<style>.async-hide { opacity: 0 !important} </style>
+<script>
+	(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+	h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+	(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+	})(window,document.documentElement,'async-hide','dataLayer',4000,
+		{'GTM-TN542JN':true});
+</script>
+
+<!-- Google Tag Manager -->
+<script>
+	(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer', 'GTM-TN542JN');
+</script>
+<!-- End Google Tag Manager -->
+
+
+
+
+	<script type="text/javascript">
+        dataLayer.push({
+            'tipoPagina': 'Aula',
+            'curso': 'Shell Scripting parte 1: Começando seus scripts de automação de tarefas'
+        });
+	</script>
+
+	
+
+	<title>Shell Scripting parte 1: Aula 1 - Atividade 13 Mãos à obra: Utilizando o laço de repetição | Alura - Cursos online de tecnologia</title>
+	
+	<link rel="shortcut icon" href="/images/alura/favicon.ico">
+	
+	<link href='//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Open+Sans:400,300,600,700,800|Source+Serif+Pro' rel='stylesheet'>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	
+	<link rel="stylesheet" href="/style/lib/video-js.bb9a425b.css">
+    <link rel="stylesheet" href="/style/lib/video-js-resolutions.d48f855c.css">
+    <link rel="stylesheet" href="/style/lib/prettify.4f36b4ca.css">
+
+	<link rel="stylesheet" href="/style/gnarus/base.1e88adda.css">
+	<link rel="stylesheet" href="/style/gnarus/block/formattedText.afb4622e.css">
+	
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/container.532971f7.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/classPage.30778e01.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/menuSettings.e7710433.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/taskProgress.6f863249.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/taskMessageInfo.4becb946.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/alternativeList.ba7ea685.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/taskFeedback.1c82537d.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/markdown.c1e23fdd.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/finishSection.7e40d196.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/phrase.6b501fa8.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/hqexplanation.3ed41021.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/openquestion.811813bb.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/textcontent.7298b79f.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/video.7c2303aa.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/singlechoice.4a8caf68.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/music.c02947a9.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/multiplechoice.70f60e4c.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/videodialog.7d2041b8.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/fillintheblank.81cde842.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/speakingpractice.5068bb32.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/pronunciationpractice.7d2876f7.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/repetition.e9ba636b.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/genericVideo.9239c799.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/projectSubmit.cd21d24b.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/taskContent.1ef47209.css">
+	<link rel="stylesheet" href="/style/gnarus/page/classPage/taskButtons.1c232b93.css">
+	<link rel="stylesheet" href="/style/gnarus/block/markdownEditor.4bc2327a.css">
+	<link rel="stylesheet" href="/style/gnarus/block/audioPlayer.36fd833a.css">
+
+	
+	
+	<style type="text/css">
+		.task:before {
+			background-color: #FFE000;
+		}
+	</style>
+	
+	
+	
+	</head>
+<body>
+
+
+	
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+	<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TN542JN"
+				  height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+<section class='task' data-allow-answer="true" data-task-section-exam="false" data-task-type="textcontent" data-task-id="28969" data-author-id="141337" data-course-code="shellscripting" data-section-name="Montando um script para converter imagens" data-section-id="5267" data-section-number="1" data-domain="cursos.alura.com.br" data-hasFeedbackAnswer="false" data-url-prefix="/">
+	<button title="Fechar menu" aria-label="Fechar menu"
+	type="button"
+	class='openMenu-button task-body-button '></button>
+	
+	<section class="task-body">
+		
+		<header class="task-body-header">
+			<div class="container">
+				<h1 class="task-body-header-title">
+					<svg class="task-body-header-title-svg" aria-label="Atividade de Atividade sem Resposta do Aluno">
+						<use xlink:href="/images/gnarus/classPage/icon-menu-icons.svg#TEXT_CONTENT" />
+					</svg>
+					<small>13</small>
+					<span class="task-body-header-title-text"> Mãos à obra: Utilizando o laço de repetição</span>
+				</h1>
+				
+					<div class="task-body-header-actions">
+						<a href="/course/shellscripting/task/28969/next" aria-hidden="true" class="task-actions-button task-actions-button-next task-submit">Próxima Atividade</a>
+					</div>
+				
+			</div>
+		</header>
+		<main class="task-body-main" data-should-warn="false">
+			
+
+
+
+
+
+
+
+	
+	
+	
+		
+
+
+
+
+<section id="task-content" class="textContent">
+	
+	<div class="container">
+		
+
+
+
+
+<div class="settings">
+	<button type="button" class="settings-button" aria-label="Configurações"></button>
+	<div class="settings-box">
+		<span class="settings-box-title"></span>
+		<ul class="settings-box-list">
+			
+				
+				
+				
+					<li class="settings-box-item settings-box-item-player"><a class="settings-box-item-player--disabled" onclick="event.preventDefault();">Mudar o player</a></li>
+					
+						<li class="settings-box-item settings-box-item-suggestion"><a href="/suggestions/new/shellscripting/28969/question">Sugerir alteração</a></li>
+					
+				
+			
+			
+		</ul>
+	</div>
+</div>
+		<div class="formattedText" data-external-links>
+			<p>Perceba que nosso diretório <strong>imagens-livros</strong> possui uma grande quantidade de imagens para serem convertidas. Dessa forma, nós podemos melhorar nosso script para que possamos passar mais parâmetros para serem processados. Só que ficar repetindo código, não é a solução mais elegante, então usaremos a estrutura de repetição <strong>for</strong></p>
+<p>Abra novamente o script que estamos trabalhando com o comando <strong>nano conversao-jpg-png.sh</strong>. Ao abrir o arquivo, guarde o caminho <strong>~/Downloads/imagens-livros</strong> em uma constante, chamada por exemplo de CAMINHO_IMAGENS. </p>
+<p><strong>Obs: Não pode haver espaços entre o nome da constante, o símbolo do &#61; e o conteúdo da constante, tem que ser por exemplo, NOME_CONSTANTE&#61;conteúdo</strong> </p>
+<p>Feito isso, digite o laço de repetição:</p>
+<pre class="prettyprint"><code>for [variável] in $&#64;
+do
+    convert $CAMINHO_IMAGENS/$[variável].jpg $CAMINHO_IMAGENS/$[variável].png
+done</code></pre>
+<p>Execute seu script passando como parâmetro os quatro próximos livros:</p>
+<ul><li><strong>arduino_pratico</strong> </li><li><strong>asp_net</strong> </li><li><strong>big_data</strong> </li><li><strong>codeigniter</strong></li></ul>
+<p>Qual é o resultado?</p>
+
+		</div>
+		<div class="task-actions">
+			
+
+
+
+
+    <a href="/forum/curso-shellscripting/exercicio-maos-a-obra-utilizando-o-laco-de-repeticao/28969/novo" class=" task-actions-button task-actions-button-forum">Discutir no Forum</a>
+
+			
+				
+					<button class="task-actions-button task-actions-button-answer task-body-actions-button task-actions-button-showOpinion">Ver opinião do instrutor</button>
+				
+				
+			
+		</div>
+		
+			
+
+
+
+
+<section id="task-feedback" class="task-feedback" aria-hidden="true">
+	<section class="task-feedback-banner">
+		<div class="container">
+			<h3 class="task-feedback-banner-title">
+				Opinião do instrutor
+			</h3>
+		</div>
+		
+
+
+
+
+<div class="settings">
+	<button type="button" class="settings-button" aria-label="Configurações"></button>
+	<div class="settings-box">
+		<span class="settings-box-title"></span>
+		<ul class="settings-box-list">
+			
+				
+				
+				
+					<li class="settings-box-item settings-box-item-player"><a class="settings-box-item-player--disabled" onclick="event.preventDefault();">Mudar o player</a></li>
+					
+						<li class="settings-box-item settings-box-item-suggestion"><a href="/suggestions/new/shellscripting/28969/opinion">Sugerir alteração</a></li>
+					
+				
+			
+			
+		</ul>
+	</div>
+</div>
+	</section>
+	
+				<div class="formattedText" data-external-links>
+					<p>Ao criar o laço de repetição estamos pegando cada parâmetro passado pelo usuário e armazenando na variável, quando tivermos um parâmetro na variável a linha de conversão dos arquivos será executado e esse processo será repetido até que todas os parâmetros passados pelo usuário tenham sido convertidos. No final, nosso script deverá estar parecido como o abaixo:</p>
+<p><img src="https://s3.amazonaws.com/caelum-online-public/shell-script/aula_1/11_laco_for.JPG" alt="" /></p>
+<p>Resultado ao rodar o script:</p>
+<p><img src="https://s3.amazonaws.com/caelum-online-public/shell-script/aula_1/10_imagem_convertida.JPG" alt="" /></p>
+
+				</div>
+			
+</section>
+		
+	</div>
+</section>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+			
+				
+
+
+
+
+	
+	
+		<section class="task-actions">
+			<div class="container">
+				
+
+
+
+
+    <a href="/forum/curso-shellscripting/exercicio-maos-a-obra-utilizando-o-laco-de-repeticao/28969/novo" class=" task-actions-button task-actions-button-forum">Discutir no Forum</a>
+
+				
+				
+				
+					<a href="/course/shellscripting/task/28969/next" class="task-actions-button task-body-actions-button task-actions-button-next">Próxima Atividade</a>
+				
+			</div>
+		</section>
+	
+
+
+			
+		</main>
+	</section>
+	
+
+
+
+
+
+
+
+
+
+
+
+<aside class="task-menu">
+	<section class="task-menu-header">
+		<button title="Fechar menu" aria-label="Fechar menu" type="button" class='openMenu-button task-menu-button '></button>
+		<div class="task-menu-header-info">
+			<a class="task-menu-header-info-title" href="/course/shellscripting" title="Ir para página do curso">
+				
+					
+					
+						<img src="https://www.alura.com.br/assets/api/cursos/shellscripting.svg" alt="ícone Shell Scripting parte 1: Começando seus scripts de automação de tarefas" class="task-menu-header-info-title-icon " width="37.5px" height="37.5px"/>
+					
+				
+				<h2 class="task-menu-header-info-title-text">Shell Scripting parte 1: Começando seus scripts de automação de tarefas</h2>
+			</a>
+			
+				<div class="task-menu-header-info-progress">
+					
+					<span class="task-menu-header-info-progress-percentage ">37%</span>
+					<span class="task-menu-header-info-progress-bar" style="background-image: linear-gradient(to right, #9de482, #9de482 37%, transparent 37%);"></span>
+				</div>
+			
+		</div>
+	</section>
+	
+	<section class="task-menu-section">
+		<div class="task-menu-section-title">
+			<span class="task-menu-section-title-number ">Aula<strong>01</strong>
+				<span>de 05</span></span>
+			<h3 class="task-menu-section-title-text">
+				Montando um script para converter imagens
+			</h3>
+		</div>
+	</section>
+	<nav class="task-menu-nav">
+		<h2 class="task-menu-nav-title">
+			Atividades
+			<span>13 de 13</span>
+		</h2>
+		<ul class="task-menu-nav-list">
+			
+				
+				<li class="task-menu-nav-item ">
+					<a href="/course/shellscripting/task/28942" class="task-menu-nav-item-link task-menu-nav-item-link-VIDEO">
+					<svg class="task-menu-nav-item-svg task-menu-nav-item-svg--done" aria-label="Atividade de Vídeo concluída">
+						<use xlink:href="/images/gnarus/classPage/icon-menu-icons.svg#VIDEO" />
+					</svg>
+					<span class="task-menu-nav-item-number">01</span>
+					<span class="task-menu-nav-item-text" >
+						<span class="task-menu-nav-item-title" title="Introdução">
+							Introdução
+						</span>
+						
+						<span class="task-menu-nav-item-infos">
+							
+								<span class="task-menu-nav-item-videoDuration" title="Ir para o Vídeo">03min</span>
+							
+						</span>
+					</span>
+					
+					</a>
+				</li>
+			
+				
+				<li class="task-menu-nav-item ">
+					<a href="/course/shellscripting/task/29528" class="task-menu-nav-item-link task-menu-nav-item-link-HQ_EXPLANATION">
+					<svg class="task-menu-nav-item-svg task-menu-nav-item-svg--done" aria-label="Atividade de Explicação concluída">
+						<use xlink:href="/images/gnarus/classPage/icon-menu-icons.svg#HQ_EXPLANATION" />
+					</svg>
+					<span class="task-menu-nav-item-number">02</span>
+					<span class="task-menu-nav-item-text" >
+						<span class="task-menu-nav-item-title" title="Para saber mais: Estrutura do curso">
+							Para saber mais: Estrutura do curso
+						</span>
+						
+					</a>
+				</li>
+			
+				
+				<li class="task-menu-nav-item ">
+					<a href="/course/shellscripting/task/28943" class="task-menu-nav-item-link task-menu-nav-item-link-VIDEO">
+					<svg class="task-menu-nav-item-svg task-menu-nav-item-svg--done" aria-label="Atividade de Vídeo concluída">
+						<use xlink:href="/images/gnarus/classPage/icon-menu-icons.svg#VIDEO" />
+					</svg>
+					<span class="task-menu-nav-item-number">03</span>
+					<span class="task-menu-nav-item-text" >
+						<span class="task-menu-nav-item-title" title="Convertendo imagem e montando script">
+							Convertendo imagem e montando script
+						</span>
+						
+						<span class="task-menu-nav-item-infos">
+							
+								<span class="task-menu-nav-item-videoDuration" title="Ir para o Vídeo">12min</span>
+							
+						</span>
+					</span>
+					
+					</a>
+				</li>
+			
+				
+				<li class="task-menu-nav-item ">
+					<a href="/course/shellscripting/task/28955" class="task-menu-nav-item-link task-menu-nav-item-link-SINGLE_CHOICE">
+					<svg class="task-menu-nav-item-svg task-menu-nav-item-svg--done" aria-label="Atividade de Atividade de Única Escolha concluída">
+						<use xlink:href="/images/gnarus/classPage/icon-menu-icons.svg#SINGLE_CHOICE" />
+					</svg>
+					<span class="task-menu-nav-item-number">04</span>
+					<span class="task-menu-nav-item-text" >
+						<span class="task-menu-nav-item-title" title="Utilização do shell script">
+							Utilização do shell script
+						</span>
+						
+					</a>
+				</li>
+			
+				
+				<li class="task-menu-nav-item ">
+					<a href="/course/shellscripting/task/28957" class="task-menu-nav-item-link task-menu-nav-item-link-SINGLE_CHOICE">
+					<svg class="task-menu-nav-item-svg task-menu-nav-item-svg--done" aria-label="Atividade de Atividade de Única Escolha concluída">
+						<use xlink:href="/images/gnarus/classPage/icon-menu-icons.svg#SINGLE_CHOICE" />
+					</svg>
+					<span class="task-menu-nav-item-number">05</span>
+					<span class="task-menu-nav-item-text" >
+						<span class="task-menu-nav-item-title" title="O que seria a primeira linha?">
+							O que seria a primeira linha?
+						</span>
+						
+					</a>
+				</li>
+			
+				
+				<li class="task-menu-nav-item ">
+					<a href="/course/shellscripting/task/28958" class="task-menu-nav-item-link task-menu-nav-item-link-HQ_EXPLANATION">
+					<svg class="task-menu-nav-item-svg task-menu-nav-item-svg--done" aria-label="Atividade de Explicação concluída">
+						<use xlink:href="/images/gnarus/classPage/icon-menu-icons.svg#HQ_EXPLANATION" />
+					</svg>
+					<span class="task-menu-nav-item-number">06</span>
+					<span class="task-menu-nav-item-text" >
+						<span class="task-menu-nav-item-title" title="Instalando o sistema operacional">
+							Instalando o sistema operacional
+						</span>
+						
+					</a>
+				</li>
+			
+				
+				<li class="task-menu-nav-item ">
+					<a href="/course/shellscripting/task/28960" class="task-menu-nav-item-link task-menu-nav-item-link-TEXT_CONTENT">
+					<svg class="task-menu-nav-item-svg task-menu-nav-item-svg--done" aria-label="Atividade de Atividade sem Resposta do Aluno concluída">
+						<use xlink:href="/images/gnarus/classPage/icon-menu-icons.svg#TEXT_CONTENT" />
+					</svg>
+					<span class="task-menu-nav-item-number">07</span>
+					<span class="task-menu-nav-item-text" >
+						<span class="task-menu-nav-item-title" title="Mãos à obra: Criando o primeiro script">
+							Mãos à obra: Criando o primeiro script
+						</span>
+						
+					</a>
+				</li>
+			
+				
+				<li class="task-menu-nav-item ">
+					<a href="/course/shellscripting/task/28944" class="task-menu-nav-item-link task-menu-nav-item-link-VIDEO">
+					<svg class="task-menu-nav-item-svg task-menu-nav-item-svg--done" aria-label="Atividade de Vídeo concluída">
+						<use xlink:href="/images/gnarus/classPage/icon-menu-icons.svg#VIDEO" />
+					</svg>
+					<span class="task-menu-nav-item-number">08</span>
+					<span class="task-menu-nav-item-text" >
+						<span class="task-menu-nav-item-title" title="Passando parâmetros para o script">
+							Passando parâmetros para o script
+						</span>
+						
+						<span class="task-menu-nav-item-infos">
+							
+								<span class="task-menu-nav-item-videoDuration" title="Ir para o Vídeo">08min</span>
+							
+						</span>
+					</span>
+					
+					</a>
+				</li>
+			
+				
+				<li class="task-menu-nav-item ">
+					<a href="/course/shellscripting/task/28961" class="task-menu-nav-item-link task-menu-nav-item-link-SINGLE_CHOICE">
+					<svg class="task-menu-nav-item-svg task-menu-nav-item-svg--done" aria-label="Atividade de Atividade de Única Escolha concluída">
+						<use xlink:href="/images/gnarus/classPage/icon-menu-icons.svg#SINGLE_CHOICE" />
+					</svg>
+					<span class="task-menu-nav-item-number">09</span>
+					<span class="task-menu-nav-item-text" >
+						<span class="task-menu-nav-item-title" title="Pegando parâmetros passados pelo usuário">
+							Pegando parâmetros passados pelo usuário
+						</span>
+						
+					</a>
+				</li>
+			
+				
+				<li class="task-menu-nav-item ">
+					<a href="/course/shellscripting/task/28962" class="task-menu-nav-item-link task-menu-nav-item-link-TEXT_CONTENT">
+					<svg class="task-menu-nav-item-svg task-menu-nav-item-svg--done" aria-label="Atividade de Atividade sem Resposta do Aluno concluída">
+						<use xlink:href="/images/gnarus/classPage/icon-menu-icons.svg#TEXT_CONTENT" />
+					</svg>
+					<span class="task-menu-nav-item-number">10</span>
+					<span class="task-menu-nav-item-text" >
+						<span class="task-menu-nav-item-title" title="Mãos à obra: Passando parâmetros para o script">
+							Mãos à obra: Passando parâmetros para o script
+						</span>
+						
+					</a>
+				</li>
+			
+				
+				<li class="task-menu-nav-item ">
+					<a href="/course/shellscripting/task/28945" class="task-menu-nav-item-link task-menu-nav-item-link-VIDEO">
+					<svg class="task-menu-nav-item-svg task-menu-nav-item-svg--done" aria-label="Atividade de Vídeo concluída">
+						<use xlink:href="/images/gnarus/classPage/icon-menu-icons.svg#VIDEO" />
+					</svg>
+					<span class="task-menu-nav-item-number">11</span>
+					<span class="task-menu-nav-item-text" >
+						<span class="task-menu-nav-item-title" title="Utilizando laço de repetição">
+							Utilizando laço de repetição
+						</span>
+						
+						<span class="task-menu-nav-item-infos">
+							
+								<span class="task-menu-nav-item-videoDuration" title="Ir para o Vídeo">06min</span>
+							
+						</span>
+					</span>
+					
+					</a>
+				</li>
+			
+				
+				<li class="task-menu-nav-item ">
+					<a href="/course/shellscripting/task/28966" class="task-menu-nav-item-link task-menu-nav-item-link-SINGLE_CHOICE">
+					<svg class="task-menu-nav-item-svg task-menu-nav-item-svg--done" aria-label="Atividade de Atividade de Única Escolha concluída">
+						<use xlink:href="/images/gnarus/classPage/icon-menu-icons.svg#SINGLE_CHOICE" />
+					</svg>
+					<span class="task-menu-nav-item-number">12</span>
+					<span class="task-menu-nav-item-text" >
+						<span class="task-menu-nav-item-title" title="O que seria o $@?">
+							O que seria o $@?
+						</span>
+						
+					</a>
+				</li>
+			
+				
+				<li class="task-menu-nav-item task-menu-nav-item--selected">
+					<a href="/course/shellscripting/task/28969" class="task-menu-nav-item-link task-menu-nav-item-link-TEXT_CONTENT">
+					<svg class="task-menu-nav-item-svg task-menu-nav-item-svg--done" aria-label="Atividade de Atividade sem Resposta do Aluno concluída">
+						<use xlink:href="/images/gnarus/classPage/icon-menu-icons.svg#TEXT_CONTENT" />
+					</svg>
+					<span class="task-menu-nav-item-number">13</span>
+					<span class="task-menu-nav-item-text" >
+						<span class="task-menu-nav-item-title" title="Mãos à obra: Utilizando o laço de repetição">
+							Mãos à obra: Utilizando o laço de repetição
+						</span>
+						
+					</a>
+				</li>
+			
+			
+		</ul>
+	</nav>
+	<section class="task-menu-sections">
+		<h2 class="task-menu-sections-title">
+			Aulas
+		</h2>
+		<select class="task-menu-sections-select" onchange="location.href='/course/shellscripting/section/'+this.value;">
+			
+				<option value="1" selected>01. Montando um script para converter imagens</option>
+			
+				<option value="2" >02. Realizando a conversão em um diretório</option>
+			
+				<option value="3" >03. Conversão de arquivos em diferentes diretórios</option>
+			
+				<option value="4" >04. Nomes dos processos</option>
+			
+				<option value="5" >05. Salvando processos em arquivos separados</option>
+			
+		</select>
+	</section>
+	<section class="task-menu-others">
+		<h2 class="task-menu-others-title ">
+			Outros Links
+		</h2>
+		<a href=/forum/curso-shellscripting/todos
+			 class="task-menu-others-link task-menu-others-link-forum"
+			 title="Ir para o fórum do curso">Fórum</a>
+		<a href="/dashboard" class="task-menu-others-link task-menu-others-link-curso" title="Ir para a página principal">Trocar Curso</a>
+	</section>
+	<section class="task-menu-footer">
+		<a class="task-menu-footer-user" href="/user/emilyncosta" title="Ir para sua página de usuário">
+			<img src="https://www.gravatar.com/avatar/a584bcf29411b0733bb26d24cea89c7b.png?r=PG&size=60x60&d=https%3A%2F%2Fcursos.alura.com.br%2Fimages%2Fforum%2Favatar_e.png" alt="Gravatar de Emilyn" class="task-menu-footer-img" width="40px" height="40px"/>
+			
+				<p class="task-menu-footer-detalhes">
+					<span class="task-menu-footer-detalhes-nome">Emilyn</span>
+					<span class="task-menu-footer-detalhes-xp">
+						36.6k xp
+					</span>
+				</p>
+			
+			<input type="hidden" value="" />
+			<input type="hidden" value="" />
+		</a>
+		<a href="/dashboard" class="task-menu-footer-logo">
+			<img src="/images/gnarus/classPage/icon-menu-alura.svg" alt="Logo da Alura" class="task-menu-footer-logo-image" width="19px" height="32px" title="Ir para a página principal" />
+		</a>
+	</section>
+</aside>
+
+</section>
+
+
+
+
+	<script src="/script/lib/jquery2/jquery-2.1.3.min.32015dd4.js"></script>
+	<script src="/script/gnarus/block/buttonToggle.1c952a31.js" async></script>
+	<script src="/script/gnarus/block/sectionMenu.9c6d35d8.js" async></script>
+
+	<script src="/script/lib/marked.min.a2851798.js"></script>
+	<script src="/script/gnarus/block/markdownEditor.4b03bd09.js" async></script>
+	<script src="/script/gnarus/block/caret.df98f577.js" async></script>
+	<script src="/js/gnarus/keydownWatchers.f20680cd.js" async></script>
+	<script src="/js/prettify.min.49a10a85.js" async></script>
+
+	<script src="/script/gnarus/block/preventsMultipleInteractions.ccefe158.js" async></script>
+	<script src="/script/gnarus/block/assessment.050f656f.js" async></script>
+	<script src="/script/gnarus/block/login-form.20124546.js" async></script>
+
+	<script src="/script/gnarus/classPage/ProjectSubmit.1da29f73.js"></script>
+	<script src="/script/gnarus/classPage/classPage.1498f9c1.js"></script>
+	<script src="/script/gnarus/classPage/aria.1c51db86.js"></script>
+	<script src="/script/gnarus/classPage/phrase.3c4b05fc.js"></script>
+	<script src="/script/gnarus/classPage/feedback.98f71e18.js"></script>
+	
+	
+
+	
+	
+	
+	
+
+	<script src="/script/musicdot/partitura.813a4339.js"></script>
+	<script src="/script/gnarus/classPage/audioProgress.71d14880.js"></script>
+	<script src="/script/gnarus/block/audioPlayer.9e2e5334.js"></script>
+
+		
+
+	
+		
+
+<script src="/script/gnarus/customerio.ad52be65.js"></script>
+<script>
+    var tracker = new CustomerIO('fccd7e3d49531457b6b2');
+    tracker.identify('141337', 'emilyncosta@gmail.com', '1536695213');
+</script>
+	
+
+</body>
+</html>
+
+<script src="/script/gnarus/task/MarkdownProcessing.f83261d2.js"></script>
+<script>
+	new MarkdownProcessing("https://cursos.alura.com.br").onLoad();
+</script>

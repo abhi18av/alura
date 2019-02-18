@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from edx_dl import edx_dl
+from alura_dl import alura_dl
 
-edx_dl.main()
+alura_dl.main()

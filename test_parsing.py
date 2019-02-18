@@ -7,12 +7,12 @@ import json
 
 import pytest
 
-from edx_dl.common import DEFAULT_FILE_FORMATS
+from alura_dl.common import DEFAULT_FILE_FORMATS
 
-from edx_dl.parsing import (
-    edx_json2srt,
-    ClassicEdXPageExtractor,
-    CurrentEdXPageExtractor,
+from alura_dl.parsing import (
+    alura_json2srt,
+    ClassicaluraPageExtractor,
+    CurrentaluraPageExtractor,
     is_youtube_url,
 )
 
@@ -43,27 +43,27 @@ def test_empty_json_subtitle():
 def test_subtitles_from_json(file, expected):
     with open(file) as f:
         json_contents = json.loads(f.read())
-    res = edx_json2srt(json_contents)
+    res = alura_json2srt(json_contents)
     assert res == expected
 
 
 # Test extraction of video/other assets from HTML
 def test_extract_units_from_html_single_unit_multiple_subs():
-    site = 'https://courses.edx.org'
+    site = 'https://courses.alura.org'
     with open("test/html/single_unit_multiple_subs.html", "r") as f:
-        units = CurrentEdXPageExtractor().extract_units_from_html(f.read(),
+        units = CurrentaluraPageExtractor().extract_units_from_html(f.read(),
                                                                   site,
                                                                   DEFAULT_FILE_FORMATS)
 
         assert units[0].videos[0].video_youtube_url == 'https://youtube.com/watch?v=b7xgknqkQk8'
-        assert units[0].videos[0].mp4_urls[0] == 'https://d2f1egay8yehza.cloudfront.net/edx-edx101/EDXSPCPJSP13-H010000_100.mp4'
-        assert units[0].videos[0].sub_template_url == 'https://courses.edx.org/courses/edX/DemoX.1/2014/xblock/i4x:;_;_edX;_DemoX.1;_video;_14459340170c476bb65f73a0a08a076f/handler/transcript/translation/%s'
+        assert units[0].videos[0].mp4_urls[0] == 'https://d2f1egay8yehza.cloudfront.net/alura-alura101/aluraSPCPJSP13-H010000_100.mp4'
+        assert units[0].videos[0].sub_template_url == 'https://courses.alura.org/courses/alura/DemoX.1/2014/xblock/i4x:;_;_alura;_DemoX.1;_video;_14459340170c476bb65f73a0a08a076f/handler/transcript/translation/%s'
 
 
 def test_extract_multiple_units_multiple_resources():
-    site = 'https://courses.edx.org'
+    site = 'https://courses.alura.org'
     with open("test/html/multiple_units.html", "r") as f:
-        units = CurrentEdXPageExtractor().extract_units_from_html(f.read(),
+        units = CurrentaluraPageExtractor().extract_units_from_html(f.read(),
                                                                   site,
                                                                   DEFAULT_FILE_FORMATS)
         assert len(units) == 3
@@ -71,13 +71,13 @@ def test_extract_multiple_units_multiple_resources():
         assert 'https://youtube.com/watch?v=CJ482b9r_0g' in [video.video_youtube_url for video in units[0].videos]
         assert len(units[0].videos[0].mp4_urls) > 0
         assert 'https://s3.amazonaws.com/berkeley-cs184x/videos/overview-motivation.mp4' in units[0].videos[0].mp4_urls
-        assert 'https://courses.edx.org/static/content-berkeley-cs184x~2012_Fall/slides/overview.pdf' in units[0].resources_urls
+        assert 'https://courses.alura.org/static/content-berkeley-cs184x~2012_Fall/slides/overview.pdf' in units[0].resources_urls
 
 
 def test_extract_multiple_units_no_youtube_ids():
-    site = 'https://courses.edx.org'
+    site = 'https://courses.alura.org'
     with open("test/html/multiple_units_no_youtube_ids.html", "r") as f:
-        units = ClassicEdXPageExtractor().extract_units_from_html(f.read(),
+        units = ClassicaluraPageExtractor().extract_units_from_html(f.read(),
                                                                   site,
                                                                   DEFAULT_FILE_FORMATS)
         assert units[0].videos[0].video_youtube_url is None
@@ -85,18 +85,18 @@ def test_extract_multiple_units_no_youtube_ids():
 
 
 def test_extract_multiple_units_youtube_link():
-    site = 'https://courses.edx.org'
+    site = 'https://courses.alura.org'
     with open("test/html/multiple_units_youtube_link.html", "r") as f:
-        units = CurrentEdXPageExtractor().extract_units_from_html(f.read(),
+        units = CurrentaluraPageExtractor().extract_units_from_html(f.read(),
                                                                   site,
                                                                   DEFAULT_FILE_FORMATS)
         assert 'https://www.youtube.com/watch?v=5OXQypOAbdI' in units[0].resources_urls
 
 
 def test_extract_multiple_units_multiple_youtube_videos():
-    site = 'https://courses.edx.org'
+    site = 'https://courses.alura.org'
     with open("test/html/multiple_units_multiple_youtube_videos.html", "r") as f:
-        units = CurrentEdXPageExtractor().extract_units_from_html(f.read(),
+        units = CurrentaluraPageExtractor().extract_units_from_html(f.read(),
                                                                   site,
                                                                   DEFAULT_FILE_FORMATS)
         assert len(units[0].videos) == 3
@@ -110,9 +110,9 @@ def test_extract_multiple_units_multiple_youtube_videos():
     ]
 )
 def test_extract_sections(file, num_sections_expected, num_subsections_expected):
-    site = 'https://courses.edx.org'
+    site = 'https://courses.alura.org'
     with open(file, "r") as f:
-        sections = CurrentEdXPageExtractor().extract_sections_from_html(f.read(), site)
+        sections = CurrentaluraPageExtractor().extract_sections_from_html(f.read(), site)
         assert len(sections) == num_sections_expected
         num_subsections = sum(len(section.subsections) for section in sections)
         assert num_subsections == num_subsections_expected
@@ -120,13 +120,13 @@ def test_extract_sections(file, num_sections_expected, num_subsections_expected)
 
 @pytest.mark.parametrize(
     'filename,site,num_courses_expected,num_available_courses_expected', [
-        ('test/html/dashboard-version-with-articles.html', 'https://courses.edx.org', 18, 14),
-        ('test/html/dashboard-version-with-divs.html', 'https://courses.edx.org', 18, 14),
+        ('test/html/dashboard-version-with-articles.html', 'https://courses.alura.org', 18, 14),
+        ('test/html/dashboard-version-with-divs.html', 'https://courses.alura.org', 18, 14),
     ]
 )
 def test_extract_courses_from_html(filename, site, num_courses_expected, num_available_courses_expected):
     with open(filename, "r") as f:
-        courses = CurrentEdXPageExtractor().extract_courses_from_html(f.read(), site)
+        courses = CurrentaluraPageExtractor().extract_courses_from_html(f.read(), site)
         assert len(courses) == num_courses_expected
         available_courses = [course for course in courses if course.state == 'Started']
         assert len(available_courses) == num_available_courses_expected
@@ -136,7 +136,7 @@ def test_is_youtube_url():
     invalid_urls = [
         'http://www.google.com/', 'TODO',
         'https://d2f1egay8yehza.cloudfront.net/mit-24118/MIT24118T314-V015000_DTH.mp4',
-        'https://courses.edx.org/courses/course-v1:MITx+24.118x+2T2015/xblock/block-v1:MITx+24.118x+2T2015+type@video+block@b1588e7cccff4d448f4f9676c81184d9/handler/transcript/available_translations'
+        'https://courses.alura.org/courses/course-v1:MITx+24.118x+2T2015/xblock/block-v1:MITx+24.118x+2T2015+type@video+block@b1588e7cccff4d448f4f9676c81184d9/handler/transcript/available_translations'
     ]
     valid_urls = [
         'http://www.youtu.be/rjOpZ3i6pRo',
