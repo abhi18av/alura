@@ -25,4 +25,5 @@ setup.log
 _resources
 
 _scratch/ignore
-_scratch/login-session.py
+_scratch/scratch-alura-login-session.py
+_scratch/scratch-session-myfreecycle.py
