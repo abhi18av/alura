@@ -18,7 +18,7 @@ from .common import Course, Section, SubSection, Unit, Video
 BeautifulSoup = lambda page: BeautifulSoup_(page, 'html.parser')
 
 
-def edx_json2srt(o):
+def alura_json2srt(o):
     """
     Transform the dict 'o' into the srt subtitles format
     """
@@ -49,7 +49,7 @@ def edx_json2srt(o):
 class PageExtractor(object):
     """
     Base class for PageExtractor
-    Every subclass can represent a different layout for an OpenEdX site.
+    Every subclass can represent a different layout for an Openalura site.
     They should implement the given methods.
 
     Usage:
@@ -79,7 +79,7 @@ class PageExtractor(object):
         raise NotImplementedError("Subclasses should implement this")
 
 
-class ClassicEdXPageExtractor(PageExtractor):
+class ClassicaluraPageExtractor(PageExtractor):
 
     def extract_units_from_html(self, page, BASE_URL, file_formats):
         """
@@ -266,7 +266,7 @@ class ClassicEdXPageExtractor(PageExtractor):
                 course_url = BASE_URL + course_soup.a['href']
                 if course_url.endswith('info') or course_url.endswith('info/') or course_url.endswith('course') or course_url.endswith('course/'):
                     course_state = 'Started'
-                # The id of a course in edX is composed by the path
+                # The id of a course in alura is composed by the path
                 # {organization}/{course_number}/{course_run}
                 course_id = course_soup.a['href'][9:-5]
             except KeyError:
@@ -279,9 +279,9 @@ class ClassicEdXPageExtractor(PageExtractor):
         return courses
 
 
-class CurrentEdXPageExtractor(ClassicEdXPageExtractor):
+class CurrentaluraPageExtractor(ClassicaluraPageExtractor):
     """
-    A new page extractor for the recent changes in layout of edx
+    A new page extractor for the recent changes in layout of alura
     """
     def extract_unit(self, text, BASE_URL, file_formats):
         re_metadata = re.compile(r'data-metadata=&#39;(.*?)&#39;')
@@ -358,9 +358,9 @@ class CurrentEdXPageExtractor(ClassicEdXPageExtractor):
         return sections
 
 
-class NewEdXPageExtractor(CurrentEdXPageExtractor):
+class NewaluraPageExtractor(CurrentaluraPageExtractor):
     """
-    A new page extractor for the latest changes in layout of edx
+    A new page extractor for the latest changes in layout of alura
     """
 
     def extract_sections_from_html(self, page, BASE_URL):
@@ -413,18 +413,18 @@ def get_page_extractor(url):
     factory method for page extractors
     """
     if (
-        url.startswith('https://courses.edx.org') or
+        url.startswith('https://courses.alura.org') or
         url.startswith('https://mitxpro.mit.edu')
     ):
-        return NewEdXPageExtractor()
+        return NewaluraPageExtractor()
     elif (
-        url.startswith('https://edge.edx.org') or
+        url.startswith('https://edge.alura.org') or
         url.startswith('https://lagunita.stanford.edu') or
         url.startswith('https://www.fun-mooc.fr')
     ):
-        return CurrentEdXPageExtractor()
+        return CurrentaluraPageExtractor()
     else:
-        return ClassicEdXPageExtractor()
+        return ClassicaluraPageExtractor()
 
 
 def is_youtube_url(url):

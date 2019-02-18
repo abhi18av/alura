@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Main module for the edx-dl downloader.
+Main module for the alura-dl downloader.
 It corresponds to the cli interface
 """
 
@@ -41,7 +41,7 @@ from .common import (
     DEFAULT_FILE_FORMATS,
 )
 from .parsing import (
-    edx_json2srt,
+    alura_json2srt,
     get_page_extractor,
     is_youtube_url,
 )
@@ -57,13 +57,13 @@ from .utils import (
 )
 
 
-OPENEDX_SITES = {
-    'edx': {
-        'url': 'https://courses.edx.org',
+OPENalura_SITES = {
+    'alura': {
+        'url': 'https://courses.alura.org',
         'courseware-selector': ('nav', {'aria-label': 'Course Navigation'}),
     },
     'edge': {
-        'url': 'https://edge.edx.org',
+        'url': 'https://edge.alura.org',
         'courseware-selector': ('nav', {'aria-label': 'Course Navigation'}),
     },
     'stanford': {
@@ -79,7 +79,7 @@ OPENEDX_SITES = {
         'courseware-selector': ('section', {'aria-label': 'Menu du cours'}),
     },
     'gwu-seas': {
-        'url': 'http://openedx.seas.gwu.edu',
+        'url': 'http://openalura.seas.gwu.edu',
         'courseware-selector': ('nav', {'aria-label': 'Course Navigation'}),
     },
     'gwu-open': {
@@ -95,33 +95,33 @@ OPENEDX_SITES = {
         'courseware-selector': ('nav', {'aria-label': 'Course Navigation'}),
     }
 }
-BASE_URL = OPENEDX_SITES['edx']['url']
-EDX_HOMEPAGE = BASE_URL + '/login_ajax'
+BASE_URL = OPENalura_SITES['alura']['url']
+alura_HOMEPAGE = BASE_URL + '/login_ajax'
 LOGIN_API = BASE_URL + '/login_ajax'
 DASHBOARD = BASE_URL + '/dashboard'
-COURSEWARE_SEL = OPENEDX_SITES['edx']['courseware-selector']
+COURSEWARE_SEL = OPENalura_SITES['alura']['courseware-selector']
 
 
-def change_openedx_site(site_name):
+def change_openalura_site(site_name):
     """
-    Changes the openedx website for the given one via the key
+    Changes the openalura website for the given one via the key
     """
     global BASE_URL
-    global EDX_HOMEPAGE
+    global alura_HOMEPAGE
     global LOGIN_API
     global DASHBOARD
     global COURSEWARE_SEL
 
-    sites = sorted(OPENEDX_SITES.keys())
+    sites = sorted(OPENalura_SITES.keys())
     if site_name not in sites:
-        logging.error("OpenEdX platform should be one of: %s", ', '.join(sites))
+        logging.error("Openalura platform should be one of: %s", ', '.join(sites))
         sys.exit(ExitCode.UNKNOWN_PLATFORM)
 
-    BASE_URL = OPENEDX_SITES[site_name]['url']
-    EDX_HOMEPAGE = BASE_URL + '/login_ajax'
+    BASE_URL = OPENalura_SITES[site_name]['url']
+    alura_HOMEPAGE = BASE_URL + '/login_ajax'
     LOGIN_API = BASE_URL + '/login_ajax'
     DASHBOARD = BASE_URL + '/dashboard'
-    COURSEWARE_SEL = OPENEDX_SITES[site_name]['courseware-selector']
+    COURSEWARE_SEL = OPENalura_SITES[site_name]['courseware-selector']
 
 
 def _display_courses(courses):
@@ -189,7 +189,7 @@ def get_available_sections(url, headers):
     return sections
 
 
-def edx_get_subtitle(url, headers,
+def alura_get_subtitle(url, headers,
                      get_page_contents=get_page_contents,
                      get_page_contents_as_json=get_page_contents_as_json):
     """
@@ -201,20 +201,20 @@ def edx_get_subtitle(url, headers,
             return get_page_contents(url, headers)
         else:
             json_object = get_page_contents_as_json(url, headers)
-            return edx_json2srt(json_object)
+            return alura_json2srt(json_object)
     except URLError as exception:
-        logging.warn('edX subtitles (error: %s)', exception)
+        logging.warn('alura subtitles (error: %s)', exception)
         return None
     except ValueError as exception:
-        logging.warn('edX subtitles (error: %s)', exception.message)
+        logging.warn('alura subtitles (error: %s)', exception.message)
         return None
 
 
-def edx_login(url, headers, username, password):
+def alura_login(url, headers, username, password):
     """
-    Log in user into the openedx website.
+    Log in user into the openalura website.
     """
-    logging.info('Logging into Open edX site: %s', url)
+    logging.info('Logging into Open alura site: %s', url)
 
     post_data = urlencode({'email': username,
                            'password': password,
@@ -231,8 +231,8 @@ def parse_args():
     """
     Parse the arguments/options passed to the program on the command line.
     """
-    parser = argparse.ArgumentParser(prog='edx-dl',
-                                     description='Get videos from the OpenEdX platform',
+    parser = argparse.ArgumentParser(prog='alura-dl',
+                                     description='Get videos from the Openalura platform',
                                      epilog='For further use information,'
                                      'see the file README.md',)
     # positional
@@ -241,19 +241,19 @@ def parse_args():
                         action='store',
                         default=[],
                         help='target course urls '
-                        '(e.g., https://courses.edx.org/courses/BerkeleyX/CS191x/2013_Spring/info)')
+                        '(e.g., https://courses.alura.org/courses/BerkeleyX/CS191x/2013_Spring/info)')
 
     # optional
     parser.add_argument('-u',
                         '--username',
                         required=True,
                         action='store',
-                        help='your edX username (email)')
+                        help='your alura username (email)')
 
     parser.add_argument('-p',
                         '--password',
                         action='store',
-                        help='your edX password, '
+                        help='your alura password, '
                         'beware: it might be visible to other users on your system')
 
     parser.add_argument('-f',
@@ -284,13 +284,13 @@ def parse_args():
                         default=False,
                         help='continue on download errors, to avoid stopping large downloads')
 
-    sites = sorted(OPENEDX_SITES.keys())
+    sites = sorted(OPENalura_SITES.keys())
     parser.add_argument('-x',
                         '--platform',
                         action='store',
                         dest='platform',
-                        help='OpenEdX platform, one of: %s' % ', '.join(sites),
-                        default='edx')
+                        help='Openalura platform, one of: %s' % ', '.join(sites),
+                        default='alura')
 
     parser.add_argument('--list-courses',
                         dest='list_courses',
@@ -410,19 +410,19 @@ def parse_args():
     return args
 
 
-def edx_get_headers():
+def alura_get_headers():
     """
-    Build the Open edX headers to create future requests.
+    Build the Open alura headers to create future requests.
     """
     logging.info('Building initial headers for future requests.')
 
     headers = {
-        'User-Agent': 'edX-downloader/0.01',
+        'User-Agent': 'alura-downloader/0.01',
         'Accept': 'application/json, text/javascript, */*; q=0.01',
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
-        'Referer': EDX_HOMEPAGE,
+        'Referer': alura_HOMEPAGE,
         'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRFToken': _get_initial_token(EDX_HOMEPAGE),
+        'X-CSRFToken': _get_initial_token(alura_HOMEPAGE),
     }
 
     logging.debug('Headers built: %s', headers)
@@ -753,7 +753,7 @@ def download_subtitle(url, filename, headers, args):
     """
     Downloads the subtitle from the url and transforms it to the srt format
     """
-    subs_string = edx_get_subtitle(url, headers)
+    subs_string = alura_get_subtitle(url, headers)
     if subs_string:
         full_filename = os.path.join(os.getcwd(), filename)
         with open(full_filename, 'wb+') as f:
@@ -983,10 +983,10 @@ def main():
     Main program function
     """
     args = parse_args()
-    logging.info('edx_dl version %s', __version__)
+    logging.info('alura_dl version %s', __version__)
     file_formats = parse_file_formats(args)
 
-    change_openedx_site(args.platform)
+    change_openalura_site(args.platform)
 
     # Query password, if not alredy passed by command line.
     if not args.password:
@@ -997,10 +997,10 @@ def main():
         exit(ExitCode.MISSING_CREDENTIALS)
 
     # Prepare Headers
-    headers = edx_get_headers()
+    headers = alura_get_headers()
 
     # Login
-    resp = edx_login(LOGIN_API, headers, args.username, args.password)
+    resp = alura_login(LOGIN_API, headers, args.username, args.password)
     if not resp.get('success', False):
         logging.error(resp.get('value', "Wrong Email or Password."))
         exit(ExitCode.WRONG_EMAIL_OR_PASSWORD)
@@ -1011,7 +1011,7 @@ def main():
     selected_courses = parse_courses(args, available_courses)
 
     # Parse the sections and build the selections dict filtered by sections
-    if args.platform == 'edx':
+    if args.platform == 'alura':
         all_selections = {selected_course:
                           get_available_sections(selected_course.url.replace('info', 'course'), 
                                                  headers)

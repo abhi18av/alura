@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 """
-Common type definitions and constants for edx-dl
+Common type definitions and constants for alura-dl
 
-The classes in this module represent the structure of courses in edX.  The
+The classes in this module represent the structure of courses in alura.  The
 structure is:
 
 * A Course contains Sections
@@ -39,7 +39,7 @@ class Course(object):
     """
     def __init__(self, id, name, url, state):
         """
-        @param id: The id of a course in edX is composed by the path
+        @param id: The id of a course in alura is composed by the path
             {organization}/{course_number}/{course_run}
         @type id: str or None
 
@@ -171,7 +171,7 @@ class ExitCode(object):
 
 
 YOUTUBE_DL_CMD = ['youtube-dl', '--ignore-config']
-DEFAULT_CACHE_FILENAME = 'edx-dl.cache'
+DEFAULT_CACHE_FILENAME = 'alura-dl.cache'
 DEFAULT_FILE_FORMATS = ['e?ps', 'pdf', 'txt', 'doc', 'xls', 'ppt',
                         'docx', 'xlsx', 'pptx', 'odt', 'ods', 'odp', 'odg',
                         'zip', 'rar', 'gz', 'mp3', 'R', 'Rmd', 'ipynb', 'py']

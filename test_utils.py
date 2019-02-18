@@ -8,7 +8,7 @@ import subprocess
 import pytest
 import six
 
-from edx_dl import utils
+from alura_dl import utils
 
 
 def test_clean_filename():
